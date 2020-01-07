@@ -1,10 +1,13 @@
+require("dotenv").config();
+
 const express = require('express');
 const mongoose = require('mongoose');
 const routes = require('./routes');
+const path = require('path');
 const cors = require('cors');
 const app = express();
 
-mongoose.connect('mongodb+srv://tableMeal:tableMeal@tablemeal-n6whx.mongodb.net/semana09?retryWrites=true&w=majority', {
+mongoose.connect(process.env.MONGO_URL, {
    useNewUrlParser: true,
    useUnifiedTopology: true, 
 });
@@ -15,6 +18,11 @@ mongoose.connect('mongodb+srv://tableMeal:tableMeal@tablemeal-n6whx.mongodb.net/
 
 app.use(cors());
 app.use(express.json()); //Muito importante
+app.use(
+   "/files",
+   express.static(path.resolve(__dirname,'..','uploads'))
+)
+
 app.use(routes);
 
 
