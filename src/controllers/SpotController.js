@@ -4,8 +4,11 @@ const User = require('../models/User');
 
 module.exports = {
 
-    async index(){
-        //1:14:30
+    async index(req, res){
+        const { tech } = req.query;
+        const spots = await Spot.find({ techs: tech});
+
+        return res.json(spots);
     },
 
     async store(req, res){
