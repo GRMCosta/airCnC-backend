@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
-//const aws = require('aws-sdk');
+const aws = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
 const { promisify } = require('util');
 
-//const s3 = new AWS.S3();
+const s3 = new aws.S3();
 
 const SpotSchema = new mongoose.Schema({
     thumbnail: String,
@@ -24,7 +24,7 @@ SpotSchema.pre('save', function(){
     }
 })
 
-/*SpotSchema.pre("remove", function(){
+SpotSchema.pre('remove', function(){
     if(process.env.STORAGE_TYPE === "s3"){
         return s3.deleteObject({
             Bucket: "uploadmyexample",
@@ -35,6 +35,6 @@ SpotSchema.pre('save', function(){
             path.resolve(__dirname, '..','..','uploads', this.thumbnail)
         );
     }
-})*/
+})
 
 module.exports = mongoose.model('Spot', SpotSchema);

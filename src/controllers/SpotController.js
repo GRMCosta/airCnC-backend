@@ -31,5 +31,13 @@ module.exports = {
             url_image
         })
         return res.json(spot);
+    },
+
+    async delete(req, res){
+        const { spot_id } = req.headers;
+        const spot = await Spot.findOne({ _id : spot_id });
+        spot.delete();
+
+        return res.json(spot);
     }
 }

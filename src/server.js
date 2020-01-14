@@ -16,7 +16,7 @@ mongoose.connect(process.env.MONGO_URL, {
 //req.params = Acessar route params( para edição, delete)
 //req.body = Acessar corpo da requisição (para criação, edição )
 
-app.use(cors());
+app.use(cors({ origin: process.env.FRONT_URL }));
 app.use(express.json()); //Muito importante
 app.use(
    "/files",
