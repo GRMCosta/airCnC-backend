@@ -28,7 +28,7 @@ SpotSchema.pre('remove', function(){
     if(process.env.STORAGE_TYPE === "s3"){
         return s3.deleteObject({
             Bucket: "uploadmyexample",
-            key: this.thumbnail
+            Key: this.thumbnail
         }).promise();
     }else{
         return promisify(fs.unlink)(
