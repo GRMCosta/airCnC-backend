@@ -4,8 +4,8 @@ const aws = require("aws-sdk");
 const multerS3 = require('multer-s3');
 
 const storageTypes = {
-    local : multer.diskStorage({
-        destination: path.resolve(__dirname, '..','..','uploads'),
+    local: multer.diskStorage({
+        destination: path.resolve(__dirname, '..', '..', 'uploads'),
         filename: (req, file, cb) => {
             const ext = path.extname(file.originalname);
             const name = path.basename(file.originalname, ext);
@@ -20,7 +20,7 @@ const storageTypes = {
         bucket: 'uploadmyexample',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
-        key: (req, file, cb) =>{
+        key: (req, file, cb) => {
             const ext = path.extname(file.originalname);
             const name = path.basename(file.originalname, ext);
             const filename = `${name}-${Date.now()}${ext}`

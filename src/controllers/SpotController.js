@@ -4,22 +4,22 @@ const User = require('../models/User');
 
 module.exports = {
 
-    async index(req, res){
-        const { tech } = req.query;
-        const spots = await Spot.find({ techs: tech});
+    async index(req, res) {
+        const {tech} = req.query;
+        const spots = await Spot.find({techs: tech});
 
         return res.json(spots);
     },
 
-    async store(req, res){
-        const { key, location : url_image = "" } = req.file;
-        const { company, techs, price } = req.body;
-        const { user_id } = req.headers;
+    async store(req, res) {
+        const {key, location: url_image = ""} = req.file;
+        const {company, techs, price} = req.body;
+        const {user_id} = req.headers;
 
         const user = await User.findById(user_id);
 
-        if(!user){
-            return res.status(400).json({error : 'User does not exists!'})
+        if (!user) {
+            return res.status(400).json({error: 'User does not exists!'})
         }
 
         const spot = await Spot.create({
@@ -33,9 +33,9 @@ module.exports = {
         return res.json(spot);
     },
 
-    async delete(req, res){
-        const { spot_id } = req.headers;
-        const spot = await Spot.findOne({ _id : spot_id });
+    async delete(req, res) {
+        const {spot_id} = req.headers;
+        const spot = await Spot.findOne({_id: spot_id});
         spot.delete();
 
         return res.json(spot);
