@@ -37,7 +37,7 @@ app.use((req, res, next) =>{
 //req.body = Acessar corpo da requisição (para criação, edição )
 
 app.use(cors({
-    origin: 'https://aircncprod.herokuapp.com',
+    origin: 'http://aircncprod.herokuapp.com',
     optionsSuccessStatus: 204
 }))
 app.use(express.json()); //Muito importante
